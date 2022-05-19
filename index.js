@@ -41,7 +41,7 @@ export async function get(event) {
 export async function post(event) {
 
   console.debug(event)
-  postDocument(event.queryStringParameters.q, event.body, event.headers["Content-Type"] ?? "raw")
+  await postDocument(event.queryStringParameters.q, event.body, event.headers["Content-Type"] ?? "raw")
 
   return {
     statusCode: 200
