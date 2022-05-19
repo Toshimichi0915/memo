@@ -1,11 +1,16 @@
 service: memo
 frameworkVersion: "3"
 
+custom:
+  tableName: ${opt:stage, 'dev'}-documents
+
 provider:
   name: aws
   runtime: nodejs14.x
   region: ap-northeast-1
   logRetentionInDays: 30
+  environment:
+    TABLE_NAME: ${self:custom.tableName}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -42,7 +47,7 @@ resources:
     DocumentsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: documents
+        TableName: ${self:custom.tableName}
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S

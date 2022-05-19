@@ -1,10 +1,11 @@
 import AWS from "aws-sdk"
 
 const db = new AWS.DynamoDB.DocumentClient()
+const tableName = process.env.TABLE_NAME
 
 async function postDocument(id, body, contentType) {
   return await db.put({
-    TableName: "documents",
+    TableName: tableName,
     TimeToLive: 3600,
     Item: { id, body, contentType }
   }).promise()
@@ -12,7 +13,7 @@ async function postDocument(id, body, contentType) {
 
 async function getDocument(id) {
   return await db.get({
-    TableName: "documents",
+    TableName: tableName,
     Key: { id }
   }).promise()
 }
