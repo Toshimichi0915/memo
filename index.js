@@ -6,8 +6,7 @@ const tableName = process.env.TABLE_NAME
 async function postDocument(id, body, contentType) {
   return await db.put({
     TableName: tableName,
-    TimeToLive: 3600,
-    Item: { id, body, contentType }
+    Item: { id, body, contentType, timeToLive: 3600 }
   }).promise()
 }
 
