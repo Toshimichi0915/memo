@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.1138.0",
+    "serverless": "^3.17.0"
+  },
+  "type": "module"
+}
