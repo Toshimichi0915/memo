@@ -22,12 +22,18 @@ export async function get(event) {
   console.debug(event)
   const document = (await getDocument(event.queryStringParameters.q)).Item
 
-  return {
-    statusCode: 200,
-    headers: {
-      "Content-Type": document.contentType
-    },
-    body: document.body
+  if (document) {
+    return {
+      statusCode: 200,
+      headers: {
+        "Content-Type": document.contentType
+      },
+      body: document.body
+    }
+  } else {
+    return {
+      statusCode: 404
+    }
   }
 }
 
