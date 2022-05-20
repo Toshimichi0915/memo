@@ -20,6 +20,7 @@ async function getDocument(id) {
 export async function get(event) {
 
   console.debug(event)
+
   const document = (await getDocument(event.queryStringParameters.q)).Item
 
   if (document) {
@@ -40,7 +41,9 @@ export async function get(event) {
 export async function post(event) {
 
   console.debug(event)
-  await postDocument(event.queryStringParameters.q, event.body, event.headers["Content-Type"] ?? "raw")
+
+  const contentType = event.headers[Object.keys(event.headers).find(it => it.toLowerCase() === "content-type")]
+  await postDocument(event.queryStringParameters.q, event.body, contentType ?? "raw")
 
   return {
     statusCode: 200
