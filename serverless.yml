@@ -2,7 +2,7 @@ service: memo
 frameworkVersion: "3"
 
 custom:
-  tableName: ${opt:stage, 'dev'}-documents
+  tableName: ${opt:stage, 'dev'}-memo
 
 provider:
   name: aws
